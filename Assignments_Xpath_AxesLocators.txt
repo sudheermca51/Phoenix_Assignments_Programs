@@ -1,0 +1,39 @@
+Identify the Current Stock Price for Thangamayil Jeweller
+Identify the Current Stock Price for Sun Retail
+  Xpath - text(),contains(text(),'visible text'),starts-with(''),count(),normalize-space
+  
+  Xpath Axes Locators: parent,following-sibling,ancestor,preceding-sibling
+1. Identify the stockName using a locator- Xpath
+   https://money.rediff.com/gainers
+   //a[normalize-space()='Sun Retail']	
+   //a[normalize-space()='Sun Retail']/parent::td/following-sibling::td[5]/a[text()='Buy']
+ 
+2.  
+   https://auto.mahindra.com/
+   //h3[text()='THAR ROXX']
+   //h3[text()='THAR ROXX']/parent::div/following-sibling::div/a/div/span[text()='Explore']
+   //h3[text()='THAR ROXX']/parent::div/following-sibling::div/a//span[text()='Explore']
+   //h5[text()='LAST MILE MOBILITY']/following-sibling::a/div/span[text()='Explore']
+
+3. https://demo.openmrs.org/openmrs/index.htm
+	Admin/Admin123 Inpatient Ward 
+	identify the patient ID and details associated with it.
+ 
+   <div> - parent tag is required
+		<a>Thar ROXX</a>
+   </div>
+   <div>
+		<button>explore</button>
+   </div> 
+  
+  
+  <div> - its not required 
+		<a>Thar ROXX</a>
+		<button>explore</button>
+   </div>
+   
+ 4. http://85.209.95.122/MMP-Release2-Integrated-Build.6.8.000/portal/login.php
+    ria1/Ria12345
+    Schedule Appointment	
+   Identify the doctorname charlie and book button associated    
+   Identify the doctorname charlie and specialization Cardiologist and book button associated    
