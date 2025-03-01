@@ -6,3 +6,11 @@
 6. Store the PatiendID,Birthdate in a expectedHMap 
 7. Fetch Birthdat associated with PatientID and store in actualHMap
 8. compare both the hashmap.
+
+
+===========================
+1. store the stockname and price in the excel.
+2. read the excel and store in the expectedHMAP -> stockname,price 
+3. fetch the price of the stocknames by taking expectedHMAP.keyset
+4. actualHMAP.
+5. compare the actualHMAP vs expecteHMap.
