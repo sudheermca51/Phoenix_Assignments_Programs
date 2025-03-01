@@ -1,0 +1,8 @@
+1. Login to demoopenmrs
+2. https://demo.openmrs.org/openmrs/index.htm
+3. Admin/Admin123 
+4. Select Inpatient Ward 
+5. Click on Find A Patient Rcord
+6. Store the PatiendID,Birthdate in a expectedHMap 
+7. Fetch Birthdat associated with PatientID and store in actualHMap
+8. compare both the hashmap.
