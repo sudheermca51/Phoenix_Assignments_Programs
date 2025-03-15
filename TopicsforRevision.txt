@@ -1,0 +1,71 @@
+Xpath Axes -Dynamic 
+HashMAp -> store and compare the data for different keys 
+Future Date->Dynamic data 
+Random -> Dynamic 
+Apache POI
+methods -method overloading 
+constructor- intialize the variable
+static- class level 
+static int i=0;
+i=5;
+
+non-static - object level 
+int i=0;
+
+a1.i=5;
+
+a2.i-->0
+
+publlic class A{
+
+	int a;//global
+	public void m1()
+	{
+		int a=0;//local 
+		
+	}
+
+}
+public 
+private
+protected-package,other packages by extending the class 
+default-package 
+SuperClass-Object 
+SubClass-Anyclass ->hashcode(),equals 
+Interfaces-abstract methods ,abstract variables,static method,default non-static methods 
+WebDriver,TakesScreenshot,JavascriptExecutor
+TestNG:
+	BeforeSuite,BeforeTest,BeforeClass
+	@Test- priority,dataProvider,groups,enabled
+	@Listener
+	@DataProvider
+	@Paramters
+	
+
+click("id","username","ria1");
+click("id","submit");
+
+public void click(String locator,String locatorRef,String value)
+{
+	WebDriverWait wait = new WebDriver(driver,90);
+	if(locator.equals("id"))
+	{
+		driver.findElement(By.id(locatorRef)).sendKeys(value);
+	}
+	else if(locator.equals("name"))
+	{
+	
+	}
+
+
+}
+
+public void click(String locator,String locatorRef)
+{
+	if(locator.equals("id"))
+	{
+		driver.findElement(By.id(locatorRef)).click();
+	}
+
+
+}
