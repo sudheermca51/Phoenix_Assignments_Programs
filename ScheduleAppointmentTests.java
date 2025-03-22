@@ -1,8 +1,13 @@
 package org.iitwf.healthcare.mmpphoenix;
 
+import java.time.Duration;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.Test;
 
 public class ScheduleAppointmentTests {
@@ -28,22 +33,59 @@ public class ScheduleAppointmentTests {
 			bookAppointment("Smith");
 			String date = FutureDateEx.getDate(30,"MM/DD/YYYY");
 			System.out.println("Future Date" + date);
+			
+			
 			//switch to a frame
+			driver.switchTo().frame("myframe");
 			//click on date textbox
-								//datepicker is opening
-			//current date and future date 
-			//future year = 2025
-			//future month= April  
-			//current year = 2025 //span[@class='ui-datepicker-year']
-			//current month = March //span[@class='ui-datepicker-month']
-			
-			//#condition 1 futureyear!= currentyear
-							//click on next
-			//#condition 2 futuremonth!=currentmonth
-							//click on next 
-			//select the day 
-			
+			//datepicker is opening
 			 
+			driver.findElement(By.id("datepicker")).click();
+			
+			//expected date and actual date 
+			String expectedYear = date.split("/")[2];
+			String expectedMonth=date.split("/")[0];
+			String expectedDay = date.split("/")[1];
+			System.out.println("Expected Year:::" + expectedYear);//2025
+			System.out.println("Expected Month:::" + expectedMonth);//04
+			System.out.println("Expected Day:::" + expectedDay);//21
+			
+			String actualYear = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText();
+			String actualMonth=driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText();
+			
+			while (!expectedYear.equals(actualYear)) {
+				driver.findElement(By.xpath("//span[text()='Next']")).click();
+				expectedYear = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText().trim();
+			}
+			while (!expectedMonth.equalsIgnoreCase(actualMonth)) {
+				driver.findElement(By.xpath("//span[text()='Next']")).click();
+				expectedMonth = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText().trim();
+			}
+
+			driver.findElement(By.linkText(expectedDay)).click();
+			
+			Select timeSelect  = new Select(driver.findElement(By.xpath("//select[@id='time']")));
+
+			timeSelect.selectByVisibleText("11Am");
+			
+			WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.id("status"),"OK")); 
+			
+			
+			driver.findElement(By.id("ChangeHeatName")).click();
+			driver.switchTo().defaultContent(); // you are now outside both frames
+			
+			wait.until(ExpectedConditions.elementToBeClickable(By.xpath("//input[@value='Submit']"))); 
+			 
+			driver.findElement(By.xpath("//textarea[@id='sym']")).sendKeys("Cold, cough and fever");
+			driver.findElement(By.xpath("//input[@type='submit']")).click();
+			
+			
+			wait.until(ExpectedConditions.textToBePresentInElementLocated(By.xpath("//h3[@class='panel-title']']"),"Patient Portal")); 
+			
+			String actualOutput = driver.findElement(By.xpath("//table[@class='table']/tbody/tr[1])")).getText();
+			
+			System.out.println("Actual Output" +actualOutput );
 	
 	}
 	public void clickMenu(String menuName)
@@ -59,8 +101,9 @@ public class ScheduleAppointmentTests {
 	}
 	public void bookAppointment(String doctorName)
 	{
+		 
 		driver.findElement(By.
-				xpath("//h4[text()='Dr."+doctorName+"']/ancestor::td/following-sibling::button")).click();
+				xpath("//h4[text()='Dr."+doctorName+"']/ancestor::ul/following-sibling::button")).click();
 		
 	}
 }
