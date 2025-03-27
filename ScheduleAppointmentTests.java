@@ -31,8 +31,7 @@ public class ScheduleAppointmentTests {
 			//selecting the book button by considering the specialization and doctorname
 			//p[contains(text(), 'Description:Cardiologist')]/parent::div/preceding-sibling::h4[text()='Dr.Sophia Rich']/ancestor::ul/following-sibling::button
 			bookAppointment("Smith");
-			String date = FutureDateEx.getDate(30,"MM/DD/YYYY");
-			System.out.println("Future Date" + date);
+			 
 			
 			
 			//switch to a frame
@@ -42,6 +41,8 @@ public class ScheduleAppointmentTests {
 			 
 			driver.findElement(By.id("datepicker")).click();
 			
+			String date = FutureDateEx.getDate(365,"MMMM/d/YYYY");
+			System.out.println("Future Date" + date);
 			//expected date and actual date 
 			String expectedYear = date.split("/")[2];
 			String expectedMonth=date.split("/")[0];
@@ -55,11 +56,11 @@ public class ScheduleAppointmentTests {
 			
 			while (!expectedYear.equals(actualYear)) {
 				driver.findElement(By.xpath("//span[text()='Next']")).click();
-				expectedYear = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText().trim();
+				actualYear = driver.findElement(By.xpath("//span[@class='ui-datepicker-year']")).getText().trim();
 			}
-			while (!expectedMonth.equalsIgnoreCase(actualMonth)) {
+			while (!expectedMonth.equals(actualMonth)) {
 				driver.findElement(By.xpath("//span[text()='Next']")).click();
-				expectedMonth = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText().trim();
+				actualMonth = driver.findElement(By.xpath("//span[@class='ui-datepicker-month']")).getText().trim();
 			}
 
 			driver.findElement(By.linkText(expectedDay)).click();
